@@ -1,11 +1,12 @@
 //
 // Created by Samuel on 13/11/2020.
 //
+#pragma once
+#include "main.h"
 
 #ifndef INFINITY_CUBE_HELPER_H
 #define INFINITY_CUBE_HELPER_H
 
-// A segment is defined as 11 leds in the cube one a single side.
-CRGB** getSegmentFromIndex(CRGB leds[], int index);
+CRGB** getSegmentFromIndex(int index);
 
 #endif //INFINITY_CUBE_HELPER_H

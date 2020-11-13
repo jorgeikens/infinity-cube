@@ -1,27 +1,35 @@
-#include <Arduino.h>
-#include <FastLED.h>
-#include "constants.h"
-#include "strip.h"
-#include "helper.h"
+#include "main.h"
 
-CRGB leds[NUM_LEDS];
-Strip<STRIP_SIZE>* strip;
+SegmentBase *strips[SEGMENT_COUNT];
+
 
 void setup() {
     delay(3000);
     Serial.begin(115200);
-    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
-    FastLED.setBrightness(BRIGHTNESS);
 
-    CRGB **pointers = getSegmentFromIndex(leds, 0);
-    strip = new Strip<STRIP_SIZE>(pointers);
-    delete[] pointers;
-
-    Serial.println(strip->getLength());
+    for (int i = 0; i < SEGMENT_COUNT; ++i) {
+        CRGB **pointers = getSegmentFromIndex(i);
+        strips[i] = new Segment<SEGMENT_SIZE>(pointers);
+        delete[] pointers;
+    }
 }
 
 void loop() {
-    strip->setUniformCRGB(CRGB(random(255), random(255), random(255)));
+    for (int i = 0; i < 255; ++i) {
+        for (auto &strip : strips) {
+            strip->setUniformCRGB(CRGB(i, 0, 0));
+        }
+        FastLED.show();
+        delay(10);
+    }
     FastLED.show();
-    delay(50);
+    for (int i = 255; i >= 0; i--) {
+        for (auto &strip : strips) {
+            strip->setUniformCRGB(CRGB(i, 0, 0));
+        }
+        FastLED.show();
+        delay(10);
+    }
+    FastLED.show();
+    delay(100);
 }

@@ -1,24 +1,25 @@
 //
 // Created by Samuel on 13/11/2020.
 //
+#pragma once
+#include "main.h"
+#include "segmentbase.h"
+
 #ifndef INFINITY_CUBE_STRIP_IMPL_H
 #define INFINITY_CUBE_STRIP_IMPL_H
 
-#include <Arduino.h>
-#include "stripbase.h"
-
 template<int STRIP_LEN>
-class Strip: public StripBase {
+class Segment: public SegmentBase {
 public:
-    explicit Strip(){};
+    explicit Segment(){};
 
     CRGB* array[STRIP_LEN];
 
-    explicit Strip(CRGB *indices[]){
+    explicit Segment(CRGB *indices[]) {
         for (int i = 0; i < STRIP_LEN; ++i) {
             array[i] = indices[i];
         }
-    };
+    }
 
     void setUniformCRGB(CRGB color) override {
         for (int i = 0; i < STRIP_LEN; ++i) {
