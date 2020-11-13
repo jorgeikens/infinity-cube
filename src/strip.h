@@ -1,27 +1,34 @@
 //
-// Created by Samuel on 26/07/2020.
+// Created by Samuel on 13/11/2020.
 //
+#ifndef INFINITY_CUBE_STRIP_IMPL_H
+#define INFINITY_CUBE_STRIP_IMPL_H
 
-#ifndef INFINITY_CUBE_STRIP_H
-#define INFINITY_CUBE_STRIP_H
+#include <Arduino.h>
+#include "stripbase.h"
 
-#include "constants.h"
-
-class Strip {
-    // Array containing the indices of this strip.
-    int leds[STRIP_SIZE]{};
-
-    // Index of the strip in the cube
-    int index;
-
+template<int STRIP_LEN>
+class Strip: public StripBase {
 public:
-    explicit Strip(int i);
+    explicit Strip(){};
 
-    int getLedIndex(int i);
+    CRGB* array[STRIP_LEN];
 
-// Used so that 2 strips on an edge have the same indices.
-bool reverse = false;
+    explicit Strip(CRGB *indices[]){
+        for (int i = 0; i < STRIP_LEN; ++i) {
+            array[i] = indices[i];
+        }
+    };
+
+    void setUniformCRGB(CRGB color) override {
+        for (int i = 0; i < STRIP_LEN; ++i) {
+            *(array[i]) = color;
+        }
+    }
+
+    int getLength() override {
+        return STRIP_LEN;
+    }
 };
 
-
-#endif //INFINITY_CUBE_STRIP_H
+#endif //INFINITY_CUBE_STRIP_IMPL_H
