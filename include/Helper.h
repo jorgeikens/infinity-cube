@@ -3,4 +3,4 @@
 //
 #pragma once
 
-CRGB** getSegmentFromIndex(int);
+CRGB* getSegmentFromIndex(int);

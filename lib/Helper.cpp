@@ -11,9 +11,9 @@
  * @param index Which of the 24 segments it should be.
  * @return array of pointers to leds representing the segment.
  */
-CRGB** getSegmentFromIndex(int index){
+CRGB* getSegmentFromIndex(int index){
     // Allocate array on heap
-    CRGB** pointers = new CRGB*[SEGMENT_SIZE];
+    CRGB* pointers = new CRGB*[SEGMENT_SIZE];
 
     // Fill array with the correct pointers.
     for (int i = 0; i < SEGMENT_SIZE; ++i) {

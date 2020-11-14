@@ -11,7 +11,7 @@ class Segment: public SegmentBase
 public:
     Segment();
 
-    Segment(CRGB**);
+    Segment(CRGB*);
 
     void setUniformCRGB(CRGB) override;
 

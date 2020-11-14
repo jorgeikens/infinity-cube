@@ -7,7 +7,7 @@ Segment<STRIP_LEN>::Segment()
 }
 
 template<int STRIP_LEN>
-Segment<STRIP_LEN>::Segment(CRGB** indices[]) 
+Segment<STRIP_LEN>::Segment(CRGB* indices[]) 
 {
     CRGB* array[STRIP_LEN];
 

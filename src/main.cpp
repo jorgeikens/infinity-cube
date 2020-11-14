@@ -9,7 +9,7 @@ void setup() {
     Serial.begin(115200);
 
     for (int i = 0; i < SEGMENT_COUNT; ++i) {
-        CRGB **pointers = getSegmentFromIndex(i);
+        CRGB* pointers = getSegmentFromIndex(i);
         strips[i] = new Segment<SEGMENT_SIZE>(pointers);
         delete[] pointers;
     }
